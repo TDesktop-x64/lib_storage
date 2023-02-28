@@ -61,14 +61,14 @@ namespace details {
 
 using RecordType = uint8;
 using PlaceId = std::array<uint8, 7>;
-using EntrySize = std::array<uint8, 3>;
+using EntrySize = std::array<uint64, 3>;
 using RecordsCount = std::array<uint8, 3>;
 
 constexpr auto kRecordSizeUnknown = size_type(-1);
 constexpr auto kRecordSizeInvalid = size_type(-2);
 constexpr auto kBundledRecordsLimit
 	= size_type(1 << (RecordsCount().size() * 8));
-constexpr auto kDataSizeLimit = size_type(1 << (EntrySize().size() * 8));
+constexpr auto kDataSizeLimit = size_type(8 << (EntrySize().size() * 8));
 
 struct Settings {
 	size_type maxBundledRecords = 16 * 1024;
