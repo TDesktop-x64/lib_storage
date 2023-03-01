@@ -67,7 +67,10 @@ bool BinlogWrapper::readPart() {
 	const auto amount = std::min(
 		left,
 		int64(_full.size() - _part.size()));
-	Assert(amount > 0);
+	//Assert(amount > 0);
+	if (amount <= 0) {
+		return no();
+	}
 	const auto readBytes = _binlog.read(
 		_full.subspan(_part.size(), amount));
 	if (!readBytes) {

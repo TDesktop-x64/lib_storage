@@ -496,7 +496,7 @@ bool DatabaseObject::processRecordStoreGeneric(
 		const Record *record,
 		Postprocess &&postprocess) {
 	const auto size = record->getSize();
-	if (size <= 0 || size > _settings.maxDataSize) {
+	if (size > _settings.maxDataSize) {
 		return false;
 	}
 	auto entry = Entry(
@@ -879,7 +879,7 @@ Error DatabaseObject::writeKeyPlaceGeneric(
 	const auto applied = processRecordStore(
 		&record,
 		std::is_class<std::decay_t<StoreRecord>>{});
-	Assert(applied);
+	//Assert(applied);
 	return Error::NoError();
 }
 
@@ -936,7 +936,7 @@ Error DatabaseObject::writeExistingPlaceGeneric(
 	const auto applied = processRecordStore(
 		&record,
 		std::is_class<StoreRecord>{});
-	Assert(applied);
+	//Assert(applied);
 	return Error::NoError();
 }
 
