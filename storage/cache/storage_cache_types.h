@@ -73,7 +73,7 @@ constexpr auto kDataSizeLimit = size_type(8 << (EntrySize().size() * 8));
 struct Settings {
 	size_type maxBundledRecords = 16 * 1024;
 	size_type readBlockSize = 100 * 1024 * 1024;
-	size_type maxDataSize = (kDataSizeLimit - 1);
+	size_type maxDataSize = 16777216;
 	crl::time writeBundleDelay = 15 * 60 * crl::time(1000);
 	size_type staleRemoveChunk = 256;
 

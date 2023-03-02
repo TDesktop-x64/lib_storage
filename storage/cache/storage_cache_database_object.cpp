@@ -108,7 +108,7 @@ void DatabaseObject::checkSettings() {
 	Expects(!_settings.totalTimeLimit
 		|| _settings.totalTimeLimit > 0);
 	Expects(!_settings.totalSizeLimit
-		|| _settings.totalSizeLimit > _settings.maxDataSize);
+		|| _settings.totalSizeLimit > (_settings.maxDataSize/10));
 }
 
 template <typename Callback, typename ...Args>
