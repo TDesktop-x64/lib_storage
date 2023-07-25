@@ -325,8 +325,11 @@ bool DatabaseObject::startDelayedPruning() {
 		return true;
 	} else if (_minimalEntryTime != 0) {
 		Assert(_minimalEntryTime > before);
-		const auto seconds = int64(_minimalEntryTime - before);
+		auto seconds = int64(_minimalEntryTime - before);
 		if (!_pruneTimer.isActive()) {
+			if (seconds < 0) {
+				seconds = 0;
+			}
 			_pruneTimer.callOnce(std::min(
 				crl::time(seconds * 1000),
 				_settings.maxPruneCheckTimeout));
