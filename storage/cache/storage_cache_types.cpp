@@ -15,7 +15,7 @@ namespace {
 
 template <typename Packed>
 inline Packed ReadTo(size_type count) {
-	Expects(count >= 0 && count < (8 << (Packed().size() * 8)));
+	Expects(count >= 0 && count < (size_type(8) << (Packed().size() * 8)));
 
 	auto result = Packed();
 	for (auto &element : result) {
