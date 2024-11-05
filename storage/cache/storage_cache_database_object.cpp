@@ -879,7 +879,7 @@ Error DatabaseObject::writeKeyPlaceGeneric(
 	}
 	_binlog.flush();
 
-	const auto applied = processRecordStore(
+	processRecordStore(
 		&record,
 		std::is_class<std::decay_t<StoreRecord>>{});
 	//Assert(applied);
@@ -936,7 +936,7 @@ Error DatabaseObject::writeExistingPlaceGeneric(
 	}
 	_binlog.flush();
 
-	const auto applied = processRecordStore(
+	processRecordStore(
 		&record,
 		std::is_class<StoreRecord>{});
 	//Assert(applied);
