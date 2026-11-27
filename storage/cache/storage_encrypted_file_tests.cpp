@@ -18,11 +18,11 @@
 #include <QtCore/QProcess>
 
 #include <thread>
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
 #include <mach-o/dyld.h>
-#elif !defined Q_OS_WIN // Q_OS_MAC
+#elif !defined Q_OS_WIN // Q_OS_MACOS
 #include <unistd.h>
-#endif // Q_OS_MAC || !Q_OS_WIN
+#endif // Q_OS_MACOS || !Q_OS_WIN
 
 extern int (*TestForkedMethod)();
 
@@ -187,16 +187,16 @@ TEST_CASE("two process encrypted file", "[storage_encrypted_file]") {
 				constexpr auto kMaxPath = 1024;
 				char result[kMaxPath] = { 0 };
 				uint32_t size = kMaxPath;
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
 				if (_NSGetExecutablePath(result, &size) == 0) {
 					return result;
 				}
-#else // Q_OS_MAC
+#else // Q_OS_MACOS
 				auto count = readlink("/proc/self/exe", result, size);
 				if (count > 0) {
 					return result;
 				}
-#endif // Q_OS_MAC
+#endif // Q_OS_MACOS
 				return "tests_storage";
 #endif // Q_OS_WIN
 			}();
